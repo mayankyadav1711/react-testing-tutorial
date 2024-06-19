@@ -1,15 +1,18 @@
 import React,{useState} from 'react';
 
-const UserForm = () => {
+const UserForm = ({onUserAdd}) => {
     const [name,setName] = useState();
     const [email,setEmail] = useState();
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(name,email)
+        onUserAdd({name,email})
+        setName('');
+        setEmail('')
+        // console.log(name,email)
     }
     return (
-        <div className='flex items-center justify-center min-h-screen'>
+        <div className='flex items-center justify-center '>
             <div className='w-full max-w-xs'>
                 <h1 className='text-4xl m-2 p-4 text-center font-semibold'>UserForm</h1>
                 <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' onSubmit={handleSubmit}>
