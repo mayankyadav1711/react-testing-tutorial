@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen,waitFor} from '@testing-library/react';
 import user from '@testing-library/user-event'
 import UserForm from './components/UserForm';
 
@@ -67,3 +67,24 @@ test('calls userAdd when form is submitted', () =>{
     expect(mock).toHaveBeenCalled();
     expect(mock).toHaveBeenCalledWith({name:"Mayank", email:"myk@gmail.com"})
 });
+
+
+test('empty the two inputs after form is submitted', async () => {
+    render(<UserForm onUserAdd={() => {}} />); // Render your UserForm component
+  
+    // Find input fields and button
+    const nameInput = screen.getByPlaceholderText(/Enter your name/i);
+    const emailInput = screen.getByPlaceholderText(/Enter your email/i);
+    const addButton = screen.getByRole('button', { name: /Add User/i });
+  
+    // Type user information and click Add button
+    user.type(nameInput, 'mayank');
+    user.type(emailInput, 'myk@gmail.com');
+    user.click(addButton);
+  
+    // Wait for inputs to be cleared
+    await waitFor(() => {
+      expect(nameInput).toHaveValue('');
+      expect(emailInput).toHaveValue('');
+    });
+  });
