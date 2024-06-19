@@ -17,7 +17,7 @@ const UserList = ({ users }) => {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-testid="users">
               {users.map((user, index) => (
                 <tr
                   key={index}
