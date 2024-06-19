@@ -43,6 +43,13 @@ For running tests, run:
 npm run test
   ```
 
+For running rtl note, run:
+
+```bash
+npx rtl-book serve roles-notes.js
+  ```
+
+
 ## Project Structure
 
 ```
